@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            color: violet;
+            font-size: 20px;
+            font-weight: bold;
+
+        }
+        img{
+            height: 300px;
+        }
+        .product {
+            display: flex;
+            justify-content: space-evenly;
+        }
+        button{
+            background: teal;
+            padding: 10px;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div class="product">
+            <div id="image-tag">
+
+                <img :src="image" :alt="altText">
+                <!-- <a :href="reff" v-html="reff"></a> -->
+            </div>
+            <div>
+                <p v-show="stock > 20">In Stock</p>
+                <p v-else="Out of stock">Out of Stock</p>
+                <div v-for="item in sizes" :key="item.sizeId" class="image_wrapper">
+                    <p @mouseover=update(item.sizeimage)>{{ item.sizeColor }}</p>
+                </div>
+                <div>
+                    <p>cart ({{cart}})</p>
+                    <button @click="add">
+                        add to cart
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                description:"Car auction",
+                image:'img/download.jpg',
+                altText:'car',
+                stock:100,
+
+                onSale: true,
+                sizes:[
+                {sizeId:24,
+                sizeColor:'orange',
+                sizeimage:'img/download.jpg'
+            },
+
+                {sizeId:'bold',
+                sizeColor: 'blue',
+                sizeimage:'img/download (3).jpg'
+            },
+                {sizeId:34,
+                sizeColor:'red',
+                sizeimage:'img/images.jpg'
+            }
+                ],
+
+                cart : 0,
+                
+            },
+            methods: {
+                add(){
+                    this.cart += 1
+                },
+                update(sizeimage) {
+                    this.image = sizeimage
+                }
+            }
+        })
+    
+    </script>
+</body>
+
+</html>
